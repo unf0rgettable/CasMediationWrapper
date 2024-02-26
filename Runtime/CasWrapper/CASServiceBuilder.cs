@@ -31,14 +31,6 @@ namespace Wrapper
             }
         }
         
-        public IAdsService QuickBuild()
-        {
-            BuildInterAdUnit();
-            BuildRewardedAdUnit();
-
-            return GetResult();
-        }
-        
         public void BuildInterAdUnit()
         {
             _adUnitsFactory.CreateInterAdUnit();

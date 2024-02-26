@@ -12,7 +12,8 @@ namespace CasWrapper
         private readonly AdsConfig _adsConfig;
         private readonly ICreator _creator;
         private IAdsService _adsService;
-        
+
+        public IAdsService AdsService => _adsService;
         public CASServiceBuilder Builder => _builder;
 
         [Preserve]
@@ -20,16 +21,14 @@ namespace CasWrapper
         {
             _creator = creator;
             _builder = creator.Instantiate<CASServiceBuilder>();
+            _adsService = _builder.GetResult();
+            _adsService.Run();
         }
         
-        public IAdsService CreateAdsService()
+        public void CreateAdsService()
         {
-            var adsService = _builder.QuickBuild();
-
-            _adsService = adsService;
-            _adsService.Run();
-
-            return _adsService;
+            _builder.BuildInterAdUnit();
+            _builder.BuildRewardedAdUnit();
         }
 
         public IMediationNetworkAnalytics CreateAnalytics() => _creator.Instantiate<CasSdkAnalytics>(_adsService);

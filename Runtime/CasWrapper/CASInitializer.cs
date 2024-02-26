@@ -1,6 +1,7 @@
 using System;
 using CAS;
 using LittleBitGames.Environment.Ads;
+using UnityEngine;
 
 namespace Wrapper
 {
@@ -13,12 +14,8 @@ namespace Wrapper
         public void Initialize()
         {
             _mediationManager = MobileAds.BuildManager()
-                // Optional initialize listener
                 .WithCompletionListener((config) => {
-                    string initErrorOrNull = config.error;
-                    string userCountryISO2OrNull = config.countryCode;
-                    bool protectionApplied = config.isConsentRequired;
-                    IMediationManager manager = config.manager;
+                    Debug.LogWarning("cas init!");
                     IsInitialized = true;
                     OnMediationInitialized?.Invoke();
                 })
