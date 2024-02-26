@@ -27,8 +27,11 @@ namespace CasWrapper
         {
             _builder.QuickBuild();
             _adsService = _builder.GetResult();
-            _adsService.Run();
-
+            foreach (var adUnit in _adsService.AdUnits)
+            {
+                adUnit?.Load();
+            }
+            
             return _adsService;
         }
 
