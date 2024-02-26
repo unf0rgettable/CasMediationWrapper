@@ -12,14 +12,14 @@ namespace CasWrapper
         private readonly AdsConfig _adsConfig;
         private readonly ICreator _creator;
         private IAdsService _adsService;
-
         
+        public CASServiceBuilder Builder => _builder;
+
         [Preserve]
         public CasSdkAds(ICreator creator)
         {
             _creator = creator;
             _builder = creator.Instantiate<CASServiceBuilder>();
-            
         }
         
         public IAdsService CreateAdsService()
