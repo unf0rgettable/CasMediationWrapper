@@ -13,13 +13,15 @@ namespace Wrapper
         public bool IsInitialized { get; private set; }
         public void Initialize()
         {
-            _mediationManager = MobileAds.BuildManager()
-                .WithCompletionListener((config) => {
-                    Debug.LogWarning("cas init!");
-                    IsInitialized = true;
-                    OnMediationInitialized?.Invoke();
-                })
-                .Build();
+            _mediationManager = MobileAds.BuildManager().WithManagerIdAtIndex(0)
+                .WithInitListener(InitCompleteAction).Initialize();
+        }
+
+        private void InitCompleteAction(bool success, string error)
+        {
+            Debug.LogWarning("cas init!");
+            IsInitialized = true;
+            OnMediationInitialized?.Invoke();
         }
     }
 }
