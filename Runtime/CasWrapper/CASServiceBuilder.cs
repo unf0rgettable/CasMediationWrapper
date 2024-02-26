@@ -17,7 +17,7 @@ namespace Wrapper
         public CASServiceBuilder(ICoroutineRunner coroutineRunner)
         {
             _initializer = new CASInitializer();
-
+            _initializer.Initialize();
             if (_initializer.IsInitialized)
             {
                 _adUnitsFactory = new CasSdkAdUnitsFactory(coroutineRunner, _initializer.MediationManager);
@@ -30,15 +30,21 @@ namespace Wrapper
                 };
             }
         }
+
+        public void QuickBuild()
+        {
+            BuildInterAdUnit();
+            BuildRewardedAdUnit();
+        }
         
         public void BuildInterAdUnit()
         {
-            _adUnitsFactory.CreateInterAdUnit();
+            _inter = _adUnitsFactory.CreateInterAdUnit();
         }
 
         public void BuildRewardedAdUnit()
         {
-            _adUnitsFactory.CreateRewardedAdUnit();
+            _rewarded = _adUnitsFactory.CreateRewardedAdUnit();
         }
 
         //заглушил баннер!!!
