@@ -1,9 +1,7 @@
-using System;
 using CAS;
 using CasWrapper;
 using LittleBit.Modules.CoreModule;
 using LittleBitGames.Ads.AdUnits;
-using LittleBitGames.Ads.Configs;
 using Wrapper;
 
 namespace LittleBitGames.Ads
@@ -25,5 +23,8 @@ namespace LittleBitGames.Ads
 
         public IAdUnit CreateRewardedAdUnit() =>
             new CASRewardedAd(null, new CasSdkRewardAdEvents(_mediationManager), _coroutineRunner, _mediationManager);
+        
+        public IAdUnit CreateBannerAdUnit() =>
+            new CASBannerAd(null, new CasSdkBannerAdEvents(_mediationManager), _coroutineRunner, _mediationManager);
     }
 }

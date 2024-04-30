@@ -9,7 +9,7 @@ namespace Wrapper
     {
         private readonly CASInitializer _initializer;
         
-        private IAdUnit _inter, _rewarded;
+        private IAdUnit _inter, _rewarded, _banner;
         private CasSdkAdUnitsFactory _adUnitsFactory;
 
         public IMediationNetworkInitializer Initializer => _initializer;
@@ -35,6 +35,7 @@ namespace Wrapper
         {
             BuildInterAdUnit();
             BuildRewardedAdUnit();
+            BuildBannerAdUnit();
         }
         
         public void BuildInterAdUnit()
@@ -46,8 +47,12 @@ namespace Wrapper
         {
             _rewarded = _adUnitsFactory.CreateRewardedAdUnit();
         }
-
-        //заглушил баннер!!!
-        public IAdsService GetResult() => new AdsService(_initializer, _inter, _rewarded, null);
+        
+        public void BuildBannerAdUnit()
+        {
+            _banner = _adUnitsFactory.CreateBannerAdUnit();
+        }
+        
+        public IAdsService GetResult() => new AdsService(_initializer, _inter, _rewarded, _banner);
     }
 }
