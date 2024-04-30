@@ -18,6 +18,9 @@ namespace CasWrapper
 
         protected override void ShowAd() => _mediationManager.GetAdView(AdSize.Banner).SetActive(true);
 
-        public override void Load() => _mediationManager.GetAdView(AdSize.Banner).Load();
+        public override void Load()
+        {
+            //_mediationManager.GetAdView(AdSize.Banner).Load();
+        }
     }
 }
