@@ -18,6 +18,9 @@ namespace Wrapper
 
         protected override void ShowAd() => _mediationManager.ShowAd(AdType.Interstitial);
 
-        public override void Load() => _mediationManager.LoadAd(AdType.Interstitial);
+        public override void Load()
+        {
+            //_mediationManager.LoadAd(AdType.Interstitial);
+        }
     }
 }

@@ -18,6 +18,9 @@ namespace CasWrapper
 
         protected override void ShowAd() => _mediationManager.ShowAd(AdType.Rewarded);
 
-        public override void Load() => _mediationManager.LoadAd(AdType.Rewarded);
+        public override void Load()
+        {
+            //_mediationManager.LoadAd(AdType.Rewarded);
+        }
     }
 }
