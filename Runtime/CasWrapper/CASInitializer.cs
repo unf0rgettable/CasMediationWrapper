@@ -13,15 +13,22 @@ namespace Wrapper
         public bool IsInitialized { get; private set; }
         public void Initialize()
         {
-            _mediationManager = MobileAds.BuildManager().WithManagerIdAtIndex(0)
-                .WithInitListener(InitCompleteAction).Initialize();
-        }
-
-        private void InitCompleteAction(bool success, string error)
-        {
-            Debug.LogWarning("cas init!");
-            IsInitialized = true;
-            OnMediationInitialized?.Invoke();
+            _mediationManager = MobileAds.BuildManager().WithManagerIdAtIndex(0).WithCompletionListener((config) => {
+                string initErrorOrNull = config.error;
+                string userCountryISO2OrNull = config.countryCode;
+                IMediationManager manager = config.manager;
+                Debug.LogError("CAS country code: " + userCountryISO2OrNull);
+                
+                bool protectionApplied = config.isConsentRequired;
+                
+                Debug.LogWarning("cas init!");
+                IsInitialized = true;
+                OnMediationInitialized?.Invoke();
+                
+                ConsentFlow.Status consentFlowStatus = config.consentFlowStatus;
+                
+                
+            }).Initialize();
         }
     }
 }
