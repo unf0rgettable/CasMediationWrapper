@@ -15,9 +15,13 @@ namespace Wrapper
         {
             _mediationManager = MobileAds.BuildManager().WithManagerIdAtIndex(0).WithCompletionListener((config) => {
                 string initErrorOrNull = config.error;
+                if (!string.IsNullOrEmpty(initErrorOrNull))
+                {
+                    Debug.LogError("CAS init ERROR: " + initErrorOrNull);
+                }
                 string userCountryISO2OrNull = config.countryCode;
                 IMediationManager manager = config.manager;
-                Debug.LogError("CAS country code: " + userCountryISO2OrNull);
+                Debug.LogWarning("CAS country code: " + userCountryISO2OrNull);
                 
                 bool protectionApplied = config.isConsentRequired;
                 
@@ -26,8 +30,6 @@ namespace Wrapper
                 OnMediationInitialized?.Invoke();
                 
                 ConsentFlow.Status consentFlowStatus = config.consentFlowStatus;
-                
-                
             }).Initialize();
         }
     }
