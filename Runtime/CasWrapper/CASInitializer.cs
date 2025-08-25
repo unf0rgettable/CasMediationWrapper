@@ -19,17 +19,22 @@ namespace Wrapper
                 {
                     Debug.LogError("CAS init ERROR: " + initErrorOrNull);
                 }
-                string userCountryISO2OrNull = config.countryCode;
-                IMediationManager manager = config.manager;
-                Debug.LogWarning("CAS country code: " + userCountryISO2OrNull);
+                else
+                {
+                    string userCountryISO2OrNull = config.countryCode;
+                    IMediationManager manager = config.manager;
                 
-                bool protectionApplied = config.isConsentRequired;
+                    Debug.LogWarning("CAS country code: " + userCountryISO2OrNull);
                 
-                Debug.LogWarning("cas init!");
-                IsInitialized = true;
-                OnMediationInitialized?.Invoke();
+                    bool protectionApplied = config.isConsentRequired;
                 
-                ConsentFlow.Status consentFlowStatus = config.consentFlowStatus;
+                    Debug.LogWarning("cas init!");
+                    IsInitialized = true;
+                    OnMediationInitialized?.Invoke();
+                
+                    ConsentFlow.Status consentFlowStatus = config.consentFlowStatus;
+                }
+
             }).Initialize();
         }
     }
